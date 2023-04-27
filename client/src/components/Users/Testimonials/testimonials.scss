@@ -1,0 +1,50 @@
+
+.testimonies{
+    display: flex;
+    flex-wrap: wrap;
+    // background-color: black;
+        width: 100%;
+        margin: auto;
+}
+
+
+.testimonials-card{
+    // background-color: pink;
+    width: 400px;
+    margin: 20px;
+    padding: 15px;
+    
+    .level1{
+        display: flex;
+        justify-content: space-between;
+        .left{
+            display: flex;
+            gap: 10px;
+            .rating{
+                z-index: -4;
+            }
+            .date{
+
+            }
+        }
+        .right{
+
+        }
+    }
+    .level2{
+
+    }
+    .level3{
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+}
+
+.last-line{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: larger;
+}

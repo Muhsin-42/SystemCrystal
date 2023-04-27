@@ -1,0 +1,58 @@
+
+.contactus-main{
+
+    width:70%;
+    margin: auto;
+    .map{
+      height: 400px;
+      iframe{
+        height: 100%;
+      }
+    }
+
+    .bottom-part{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      .title{
+        font-size: larger;
+        font-weight: bold;
+      }  
+      button{
+        min-width: max-content;
+        padding: 10px;
+        color: white;
+        background-color: var(--primary-color);
+      }
+      .section-1{
+        width: min-content;
+      }
+      .section-2{
+        width: min-content;
+      }
+      .section-3{
+        width: max-content;
+        ul{
+            padding: 0;
+            list-style-type: none;
+        }
+      }
+    }
+}
+
+@media screen and (max-width: 600px) {
+  .contactus-main{
+    // background-color: red;
+    width: 100% !important;
+  }
+  .map{
+    height: 300px !important;
+    iframe{
+      height: 100%;
+    }
+  }
+  .bottom-part{
+    justify-content: flex-start !important;
+    // background-color: rebeccapurple ;
+  }
+}

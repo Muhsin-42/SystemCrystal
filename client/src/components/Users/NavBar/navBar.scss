@@ -1,0 +1,99 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Euclid Circular A", "Poppins";
+    background: white;
+    color: #222;
+  }
+  
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 20px;
+    width: 100%;
+    height: 72px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+  }
+  
+  nav a {
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+    color:  var(--primary-color);
+  }
+  
+  nav span {
+    margin-right: 10px;
+  }
+  
+  nav a.active {
+    color:  var(--primary-color);
+  }
+  
+  
+
+
+  // Meee
+  .navbarM{
+      display: flex;
+      justify-content : space-between
+  }
+  .left-nav{
+    display: flex;
+    align-items: center;
+  }
+
+  .right-nav{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  
+  @media (max-width: 875px) {
+    .truncate {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 850px) {
+    .left-nav{
+      max-width: 60%;
+    }
+  }
+
+
+
+  @media (max-width: 650px) {
+    .right-nav{
+      display: none;
+    }
+    .left-nav{
+      min-width: 100%;
+    }
+  }

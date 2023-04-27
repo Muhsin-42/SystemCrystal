@@ -1,0 +1,16 @@
+:root {
+  /* --primary-color: #8f44fd; */
+  --primary-color: #49497F;
+}
+
+
+.primary-color{
+  color: var(--primary-color);
+}
+.primary-color-bg{
+  background-color: var(--primary-color) !important;
+}
+
+.cursor-pointer{
+  cursor: pointer !important;
+}

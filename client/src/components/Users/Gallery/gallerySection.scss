@@ -1,0 +1,17 @@
+.gallery-section{
+    .images{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        img{
+            width: 335px;
+            margin: 20px 0px;
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+    img{
+        width: 100% !important;
+    }
+}
