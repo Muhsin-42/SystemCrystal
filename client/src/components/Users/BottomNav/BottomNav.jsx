@@ -3,10 +3,10 @@ import './bottomNav.scss';
 import { Link } from 'react-router-dom';
 const BottomNav = () => {
   function handleCallClick() {
-    window.location.href = 'tel:+1234567890';
+    window.open('tel:9744700014','_blank');
   }
   function handleDirectionClick() {
-    window.location.href = 'https://www.google.com/maps/search/?api=1&query=Space+Needle';
+    window.open('https://goo.gl/maps/B7qNTox1sQFSg2j7A','_blank');
   }
   return (
     <div className="bottom-navigation">

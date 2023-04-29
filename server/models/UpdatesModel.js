@@ -8,7 +8,7 @@ const UpdatesSchema = new Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'admins',
         required: true
     },
     image: {

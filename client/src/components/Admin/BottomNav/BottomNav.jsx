@@ -7,7 +7,7 @@ const BottomNav = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="bottom-navigation">
+    <div className="admin-bottom-navigation">
       <Link to="#contact" onClick={()=>dispatch(setLogout())}>Logout</Link>
     </div>
   );

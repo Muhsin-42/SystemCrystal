@@ -16,11 +16,12 @@ import { useDropzone } from "react-dropzone";
 import axios from '../../../utils/axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { storage } from '../../../firebase/firebase'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { setNewUpdate, setUpdates } from '../../../Redux/store'
+import { ref, uploadBytes, getDownloadURL,getStorage, getMetadata } from 'firebase/storage'
+import { setGallery, setNewUpdate, setUpdates } from '../../../Redux/store'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {v4} from 'uuid'
+
 
 
 const StyledModal = styled(Modal)({
@@ -36,7 +37,7 @@ const UserBox = styled(Box)({
     marginBottom: "20px"
 });
 
-const AddUpdate = () => {
+const AddImage = () => {
     const [open, setOpen] = useState(false);
     const [image, setImgae] = useState(false);
     const [files, setFiles] = useState([]);
@@ -44,13 +45,12 @@ const AddUpdate = () => {
     const [loading, setLoading] = useState(false);
     const token = useSelector((state) => state.token);
     const currentUser = useSelector((state) => state.user);
-    const updates = useSelector((state) => state.updates);
-    // const [posts, setPosts] = useState([])
+    const gallery = useSelector((state) => state.gallery);
+
     const dispatch = useDispatch();
     const [imageUpload, setImageUpload] = useState(null);
-    const notifyMinimun = () => toast.warn("Caption should be atleast 10 characters.", {
-        position: toast.POSITION.TOP_RIGHT
-    });
+
+
     const notifySuccess = () => toast.success("Post added successfully", {
         position: toast.POSITION.TOP_RIGHT
     });
@@ -81,13 +81,8 @@ const AddUpdate = () => {
       
   const handleSubmitMe = (event) => {
 
-    if(postContent.trim().length<5){
-        notifyMinimun();
-        return;
-    }
     
     if(!files[0]){
-        uploadPost('');
         return;
     }
     
@@ -101,45 +96,64 @@ const AddUpdate = () => {
             const fileExtension = files[0]?.type?.split('/').pop(); 
             const uploadImageName = `${v4()}.${fileExtension}`;
 
-            const imageRef = ref(storage, `updates/${uploadImageName}`)
-            uploadBytes(imageRef, imageUpload).then((response) => {
+
+            const uploadMetadata = {
+                customMetadata: {
+                  uploadDate: new Date().toISOString() // Set the upload date as a custom metadata field
+                }
+              };
+
+
+            const imageRef = ref(storage, `gallery/${uploadImageName}`)
+            uploadBytes(imageRef, imageUpload, uploadMetadata).then((response) => {
                 getDownloadURL(imageRef).then((url) => {
-                    uploadPost(url);
+                    getMetadata(imageRef).then((metadata) => {
+                        const uploadDate = metadata.customMetadata.uploadDate; // Extract the upload date from the metadata
+                        console.log(url, uploadDate);
+                        dispatch(setGallery({gallery : [{url,uploadDate},...gallery]}));
+                      }).catch((error) => {
+                        console.error('Error getting metadata:', error);
+                      });
+
                 }).catch((error) => {
                     console.error('Error getting download URL:', error);
                 });
+                setLoading(false);
+                setOpen(false);
+                setFiles([]);
             })
+
         }
     }, [imageUpload]);
 
 
 
 
-    const uploadPost = async (uploadImageName) => {
-        console.log('url => ',uploadImageName)
-        try {
-            const result = await axios.post(`api/admin/update/${currentUser._id}`, { data: uploadImageName, content: postContent }, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-            console.log(' ss post ',result.status)
-            if(result.status > 400){
-                notifyFailure();
-            }else{
-                notifySuccess();
-                dispatch(setUpdates({ updates: [result.data, ...updates] }));
-            }
+    // const uploadImage = async (uploadImageName) => {
+    //     console.log('url => ',uploadImageName)
+    //     try {
+    //         const result = await axios.post(`api/admin/gallery/${currentUser._id}`, { data: uploadImageName }, {
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 'Authorization': `Bearer ${token}`,
+    //             },
+    //         });
+    //         console.log(' ss post ',result.status)
+    //         if(result.status > 400){
+    //             notifyFailure();
+    //         }else{
+    //             notifySuccess();
+    //             dispatch(setUpdates({ updates: [result.data, ...updates] }));
+    //         }
             
-        } catch (error) {
-        }
-        setLoading(false);
-        setOpen(false);
-        setFiles([]);
-        setPostContent("");
-    }
-    // ********************
+    //     } catch (error) {
+    //     }
+    //     setLoading(false);
+    //     setOpen(false);
+    //     setFiles([]);
+    //     setPostContent("");
+    // }
+    // // ********************
 
 
     return (
@@ -161,7 +175,6 @@ const AddUpdate = () => {
                         <Typography fontFamily={500} variant="span">{user?.username}</Typography>
                     </UserBox>
 
-                    <TextField onChange={(e) => setPostContent(e.target.value)} sx={{ width: "100%" }} id="standard-multiline-static" multiline rows={3} variant="standard" placeholder="Give Caption"  />
                     {
                         !files[0] &&
                         <Box {...getRootProps({ className: 'dropzone' })}
@@ -200,5 +213,5 @@ const AddUpdate = () => {
     );
 };
 
-export default AddUpdate
+export default AddImage
 

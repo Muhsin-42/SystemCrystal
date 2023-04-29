@@ -10,6 +10,7 @@ import ProtectedLayout from "./ProtectedLayout";
 import AdminNavBar from "../components/Admin/AdminNavBar/AdminNavBar";
 import AdminBottomBar from "../components/Admin/BottomNav/BottomNav";
 import Updates from "../pages/Admin/Updates/Updates";
+import Gallery from "../pages/Admin/Gallery/Gallery";
 
 const UserLayout = () => {
     return (
@@ -59,6 +60,13 @@ const routes = [
                 element : 
                 <ProtectedLayout>
                     <Updates/>
+                </ProtectedLayout>
+            },
+            {
+                path : '/admin/gallery',
+                element : 
+                <ProtectedLayout>
+                    <Gallery/>
                 </ProtectedLayout>
             },
         ]

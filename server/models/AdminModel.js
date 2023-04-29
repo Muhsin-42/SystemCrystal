@@ -57,7 +57,7 @@ AdminSchema.methods.generateAuthToken = function () {
 	return token;
 };
 
-const Admin = mongoose.model("admin", AdminSchema);
+const Admin = mongoose.model("admins", AdminSchema);
 
 
 const validate = (data) => {
