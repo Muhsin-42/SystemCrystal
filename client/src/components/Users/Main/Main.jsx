@@ -1,5 +1,6 @@
 import React from 'react'
 import './main.scss'
+import { Link } from 'react-router-dom'
 
 const Main = () => {
   return (
@@ -11,7 +12,7 @@ const Main = () => {
 
         <span className='d-block'>Cleaners in Kochi</span>
         <span className='d-block'>Open today until 20:00</span>
-        <button className='quote-btn'>GET QUOTE</button>
+        <Link to="#updates"><button  className='quote-btn'>GET QUOTE</button></Link>
     </div>
     </section>
 </section>

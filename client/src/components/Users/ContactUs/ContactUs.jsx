@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import GoogleMapReact from 'google-map-react';
 import './contactus.scss'
+import { setBasicDetails } from '../../../Redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ContactUs = () => {
+
+    const dispatch = useDispatch();
+    const basicDetails = useSelector(state=>state.basicDetails);
+    const getBasicDetails = async () =>{
+        try {
+            const response = await axios.get('api/admin/basicDetails');
+            if(response.status < 310){
+                console.log('resss ',response)
+              dispatch(setBasicDetails({basicDetails: response.data}))
+            }
+        } catch (error) {
+            
+        }
+      }
+
+    useEffect(()=>{
+        getBasicDetails();
+    },[]);
+
+    function handleCallClick() {
+        window.open(`tel:${basicDetails?.phone}`,'_blank');
+      }
+      function handleDirectionClick() {
+        window.open('https://goo.gl/maps/B7qNTox1sQFSg2j7A','_blank');
+      }
+
     const center = {
         lat: 37.7749,
         lng: -122.4194
@@ -21,13 +49,14 @@ const ContactUs = () => {
             <div className="bottom-part m-5">
                 <div className="section-1">
                     <span className='title'>CONTACT</span>
-                    <button className='px-5 fs-5 my-3'>CALL NOW</button>
-                    <span>095 943 9340</span>
+                    <button className='px-5 fs-5 my-3' onClick={handleCallClick}>CALL NOW</button>
+                    <span>{basicDetails?.phone1}</span><br />
+                    <span>{basicDetails?.phone2}</span>
                 </div>
                 <div className="section-2 mb-4">
                     <span className='title'>ADDRESS</span>
-                    <button className='px-5 fs-5 my-3'>GET DIRECTION</button>
-                    <span>Akkat Bye Ln, Thottakkattukara, Aluva, Kerala 683108</span>
+                    <button className='px-5 fs-5 my-3' onClick={handleDirectionClick}>GET DIRECTION</button>
+                    <span>{basicDetails?.address}</span>
                 </div>
                 <div className="section-3">
                     <span className='title'>OPENING HOURS</span>

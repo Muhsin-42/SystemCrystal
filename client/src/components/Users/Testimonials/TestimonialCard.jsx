@@ -5,23 +5,28 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
-function TestimonialCard() {
+import moment from 'moment'
+function TestimonialCard({review}) {
+  const currentDate = moment();
+  
   return (
     <div className="testimonials-card shadow-lg">
             <div className="level1">
                 <div className="left">
-                    <Rating className="rating" name="read-only" value={4} readOnly />
-                    <span className="date">2 days ago</span>
+                    <Rating className="rating" name="read-only" value={parseInt(review?.rating)} readOnly />
+                    <span className="date">{moment(review.createdAt).from(currentDate, true)}</span>
                 </div>
                 <div className="right">
                   <MoreVertIcon className='cursor-pointer'></MoreVertIcon>
                 </div>
             </div>
             <div className="level2">
-                Very professional and did a good job of kitchen deep cleaning. Highly recommend them for deep cleaning
+                {
+                  review?.reviewMessage
+                }
             </div>
             <span className="level3">
-            - raghusubash n
+            - {review?.fullname}
             </span>
     </div>
   )

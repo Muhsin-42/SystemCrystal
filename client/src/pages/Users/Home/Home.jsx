@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import Updates from '../../../components/Users/Updates/Updates'
 import Testimonials from '../../../components/Users/Testimonials/Testimonials'
 import GallerySection from '../../../components/Users/Gallery/GallerySection'
@@ -9,7 +8,6 @@ import { useLocation } from 'react-router-dom';
 import Main from '../../../components/Users/Main/Main'
 const Home = () => {
   const location = useLocation();
-  console.log(location)
   useEffect(() => {
     if(location.hash!==''){
       const element = document.querySelector(location.hash);

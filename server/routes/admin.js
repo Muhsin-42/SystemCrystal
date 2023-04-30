@@ -8,5 +8,7 @@ router.post('/login', adminController.adminLogin);
 router.post('/update/:userId',adminController.verifyToken, adminController.postUpdate);
 router.delete('/update/:updateId',adminController.verifyToken, adminController.deleteUpdate);
 router.get('/update', adminController.getUpdates);
+router.get('/basicDetails', adminController.getBasicDetails);
+router.delete('/review/:reviewId',adminController.verifyToken, adminController.deleteReview);
 
 module.exports = router;

@@ -5,7 +5,7 @@ import axios from '../../../utils/axios';
 import { setGallery, setUpdates } from '../../../Redux/store';
 import moment from 'moment';
 import Swal from 'sweetalert2'
-import { getStorage, ref, listAll, getDownloadURL, getMetadata } from "firebase/storage";
+import { getStorage, ref, listAll, getDownloadURL, getMetadata, deleteObject } from "firebase/storage";
 import { storage } from '../../../firebase/firebase'
 
 const Gallery = () => {
@@ -15,7 +15,7 @@ const Gallery = () => {
   const currentUser = useSelector((state)=>state.user);
   const token = useSelector((state)=>state.token);
 
-  const getAllUpdates = async ()=>{
+  const getGallery = async ()=>{
 
     try{
       const galleryRef = ref(storage, 'gallery');
@@ -33,7 +33,6 @@ const Gallery = () => {
       
           await Promise.all(itemPromises);
           galleryList.sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate));
-          console.log('galleryList:', galleryList);
           dispatch(setGallery({ gallery: galleryList }));
         })
         .catch((error) => {
@@ -46,10 +45,10 @@ const Gallery = () => {
   }
 
   useEffect(()=>{
-    getAllUpdates();
+    getGallery();
   },[]);
 
-  const deleteUpdate = async (id)=> {
+  const deleteImage = async (url)=> {
     try {
       Swal.fire({
         title: 'Are you sure?',
@@ -61,29 +60,27 @@ const Gallery = () => {
         confirmButtonText: 'Yes, delete it!'
       }).then(async (result) => {
         if (result.isConfirmed) {
-          if(result.status < 300){
-            dispatch(setUpdates({ gallery: gallery.filter(gallery => gallery.url !== url) }));
+          const storageRef = ref(storage, url);
+          const imageRef = ref(storage, `gallery/${storageRef.name}`);
+          deleteObject(imageRef)
+          dispatch(setGallery({ gallery: gallery.filter(gallery => gallery.url !== url) }));
             Swal.fire(
               'Deleted!',
               'Your file has been deleted.',
               'success'
             )
 
-          }
         }
       })
     } catch (error) {
       
     }
   }
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
 
     <div className='mt-5 pt-5 px-2'  style={{ overflowX: 'auto' }}> 
-          <table className='table table-striped' style={{
-            // overflowX: 'scroll'
-          }}>
+          <table className='table table-striped'>
       <thead className='thead-dark'>
         <tr>
           <th>No.</th>
@@ -97,10 +94,9 @@ const Gallery = () => {
           <tr key={index}>
             <td>{index + 1}</td>
             <td><img src={image.url} height={50} width={50} alt="post" /></td>
-            <td>{image?.uploadDate}</td>
-            {/* <td>{ moment(image?.uploadDate).format('MMMM DD, YYYY')}</td> */}
+            <td>{ moment(image?.uploadDate).format('MMMM DD, YYYY')}</td>
             <td>
-              <button className='btn btn-outline-danger' onClick={() => deleteUpdate(image.url)}>Delete</button>
+              <button className='btn btn-outline-danger' onClick={() => deleteImage(image.url)}>Delete</button>
             </td>
           </tr>
         ))}

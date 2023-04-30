@@ -11,6 +11,7 @@ import AdminNavBar from "../components/Admin/AdminNavBar/AdminNavBar";
 import AdminBottomBar from "../components/Admin/BottomNav/BottomNav";
 import Updates from "../pages/Admin/Updates/Updates";
 import Gallery from "../pages/Admin/Gallery/Gallery";
+import AdminTestimonials from "../pages/Admin/AdminTestimonials/AdminTestimonials";
 
 const UserLayout = () => {
     return (
@@ -67,6 +68,13 @@ const routes = [
                 element : 
                 <ProtectedLayout>
                     <Gallery/>
+                </ProtectedLayout>
+            },
+            {
+                path : '/admin/testimonials',
+                element : 
+                <ProtectedLayout>
+                    <AdminTestimonials/>
                 </ProtectedLayout>
             },
         ]

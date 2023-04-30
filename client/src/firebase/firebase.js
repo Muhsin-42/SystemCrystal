@@ -5,13 +5,13 @@ import {getStorage} from 'firebase/storage'
 // TODO: Add SDKs for Firebase products that you want to use
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCaCRp1OQW6CJGeZcczQjKFdB8KK30P_UQ",
-  authDomain: "smartcrystalfacility.firebaseapp.com",
-  projectId: "smartcrystalfacility",
-  storageBucket: "smartcrystalfacility.appspot.com",
-  messagingSenderId: "1095948828197",
-  appId: "1:1095948828197:web:9b915bf28dc388788549cc",
-  measurementId: "G-7RBHR1FLTG"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase

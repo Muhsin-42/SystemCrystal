@@ -1,0 +1,28 @@
+.basic-det-card{
+    width: max-content;
+    // background-color: red;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    margin: 20px;
+    cursor: pointer;
+    
+    padding: 0 50px;
+
+    span{
+        word-break: break-all;
+    }
+    .title{
+        padding: 0 0 20px 0;
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 500px) {
+    .dashboard-card{
+        width: 100%;
+    }
+}
+  

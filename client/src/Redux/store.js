@@ -4,10 +4,12 @@ const initialState = {
     user : null,
     token : null,
     admin : null,
+    postedReview: false,
     reviewPosted : false,
     reviews : [],
     updates: [],
-    gallery : []
+    gallery : [],
+    basicDetails : {}
 };
 
 
@@ -40,6 +42,9 @@ export const authSlice = createSlice({
             const newReview = action.payload.newReview;
             state.reviews.unshift(newReview);
         },
+        setPostedReview : (state,action) =>{
+            state.postedReview = action.payload.postedReview;
+        },
 
         // Gallery
         setGallery : (state,action) =>{
@@ -48,6 +53,11 @@ export const authSlice = createSlice({
         setNewImage : (state,action) => {
             const newImage = action.payload.newImage;
             state.gallery.unshift(newImage);
+        },
+
+        // Basic Details
+        setBasicDetails : (state,action) =>{
+            state.basicDetails = action.payload.basicDetails;
         },
 
         // Updates
@@ -63,6 +73,6 @@ export const authSlice = createSlice({
 
 
 
-export const { setLogin, setLogout, setUser, setToken, setReviewPosted, setReviews, setNewReview, setGallery, setNewImage, setUpdates,setNewUpdate} = authSlice.actions;
+export const { setLogin, setLogout, setUser, setToken,setBasicDetails, setReviewPosted, setReviews, setNewReview, setPostedReview, setGallery, setNewImage, setUpdates,setNewUpdate} = authSlice.actions;
 
 export default authSlice.reducer;

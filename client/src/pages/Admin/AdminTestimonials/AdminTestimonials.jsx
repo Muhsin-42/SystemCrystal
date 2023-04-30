@@ -1,47 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import AddUpdate from './AddUpdate'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../utils/axios';
-import { setUpdates } from '../../../Redux/store';
+import {  setReviews } from '../../../Redux/store';
 import moment from 'moment';
 import Swal from 'sweetalert2'
 import { ref, deleteObject } from 'firebase/storage'
 import { storage } from '../../../firebase/firebase'
-const Updates = () => {
+const AdminTestimonials = () => {
 
   const dispatch = useDispatch();
-  const updates = useSelector((state)=>state.updates);
+  const reviews = useSelector((state)=>state.reviews);
   const currentUser = useSelector((state)=>state.user);
   const token = useSelector((state)=>state.token);
-  const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentUpdates = updates?.slice(indexOfFirstPost, indexOfLastPost);
-
-  const getAllUpdates = async ()=>{
+  const getReviews = async ()=>{
     try {
-      const response = await axios.get('api/admin/update',{
-        headers :{
-          'Content-Type' : 'application/json',
-          'Authorization' : `Bearer ${token}`
-        }
-      })
-      dispatch(setUpdates({updates:response.data}));
-      setTotalPages(Math.ceil(updates.length / 10)); 
-
+      const response = await axios.get('api/user/review')
+      if(response.status<310){
+        console.log('res ',response.data)
+        dispatch(setReviews({reviews:response.data}));
+      }
     } catch (error) {
       
+      console.log('er ',error)
     }
   }
 
   useEffect(()=>{
-    getAllUpdates();
+    getReviews();
   },[]);
 
-  const deleteUpdate = async (id,imageUrl)=> {
+  const deleteReview = async (id)=> {
     try {
       Swal.fire({
         title: 'Are you sure?',
@@ -53,17 +42,14 @@ const Updates = () => {
         confirmButtonText: 'Yes, delete it!'
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const storageRef = ref(storage, imageUrl);
-          const imageRef = ref(storage, `updates/${storageRef.name}`);
-          const result = await axios.delete(`api/admin/update/${id}`,{
+          const result = await axios.delete(`api/admin/review/${id}`,{
             headers :{
               'Content-Type' : 'application/json',
               'Authorization' : `Bearer ${token}`
             }
           })
           if(result.status < 300){
-            deleteObject(imageRef)
-            dispatch(setUpdates({ updates: updates.filter(update => update._id !== id) }));
+            dispatch(setReviews({ reviews: reviews.filter(review => review._id !== id) }));
             Swal.fire(
               'Deleted!',
               'Your file has been deleted.',
@@ -76,7 +62,7 @@ const Updates = () => {
       
     }
   }
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
 
@@ -87,30 +73,33 @@ const Updates = () => {
       <thead className='thead-dark'>
         <tr>
           <th>No.</th>
-          <th>Image</th>
-          <th>Description</th>
+          <th>rating</th>
+          <th>review</th>
+          <th>username</th>
+          <th>email</th>
           <th>Date</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        {updates.map((update, index) => (
+        {reviews.map((review, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
-            <td><img src={update.image} height={50} width={50} alt="post" /></td>
-            <td style={{ minWidth : '200px'}}>{update.content.slice(0,50)}...</td>
-            <td>{ moment(update?.createdAt).format('MMMM DD, YYYY')}</td>
+            <td>{review.rating}</td>
+            <td style={{ minWidth : '200px'}}>{review.reviewMessage}...</td>
+            <td >{review.fullname}</td>
+            <td >{review.email}</td>
+            <td>{ moment(review?.createdAt).format('MMMM DD, YYYY')}</td>
             <td>
-              <button className='btn btn-outline-danger' onClick={() => deleteUpdate(update?._id,update?.image)}>Delete</button>
+              <button className='btn btn-outline-danger' onClick={() => deleteReview(review?._id)}>Delete</button>
             </td>
           </tr>
         ))}
       </tbody>
     </table>
     </div>
-    <AddUpdate/>
     </>
   )
 }
 
-export default Updates
+export default AdminTestimonials

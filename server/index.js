@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const adminRoute = require('./routes/admin.js');
 const connectDB = require('./utils/connection.js');
-// const userRouter = require('./routes/user.')
+const userRoute = require('./routes/user.js')
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ app.use(morgan('common'))
 
 
 // routes
-// app.use('/api/user',userRoute);
+app.use('/api/user',userRoute);
 app.use('/api/admin',adminRoute);
 
 

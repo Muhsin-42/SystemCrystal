@@ -1,10 +1,12 @@
 const { LoginValidate } = require('../utils/LoginValidate');
 const { Admin, validate } = require('../models/AdminModel');
+const ReviewModel = require('../models/ReviewModel')
 const UpdatesModel = require('../models/UpdatesModel')
 const TokenModel = require('../models/TokenModel');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const AdminModel = require('../models/AdminModel');
 
 const adminController = {
     
@@ -79,7 +81,24 @@ const adminController = {
           console.log(error);
           res.status(500).json({ message: error.message });
         }
-      },
+    },
+    deleteReview: async (req, res) => {
+        try {
+          const reviewId = req.params.reviewId;
+            console.log(reviewId)
+
+            const deletedReview = await ReviewModel.findByIdAndDelete(reviewId);
+
+          if (!deletedReview) {
+            return res.status(404).json({ message: 'Review not found' });
+          }
+      
+          res.status(200).json({ message: 'Review deleted successfully' });
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({ message: "something went wrong" });
+        }
+    },
       
     getUpdates : async(req,res)=>{
         try {
@@ -89,6 +108,17 @@ const adminController = {
             
             res.status(200).json(updates)
         } catch (error) {
+            res.status(500);
+        }
+    },
+    getBasicDetails : async(req,res)=>{
+        try {
+            const basicDetails = await Admin.findOne({document:'basicdetails'});
+            console.log(basicDetails)
+            if(!basicDetails) return res.status(400)
+            res.status(200).json(basicDetails)
+          } catch (error) {
+          console.log(error)
             res.status(500);
         }
     },

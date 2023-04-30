@@ -1,12 +1,16 @@
 import React from 'react'
 import './card.scss'
-const DashboardCard = () => {
+import { Link } from 'react-router-dom'
+const DashboardCard = ({data,text,link}) => {
   return (
     <>
+
+    <Link to={link}>
       <div className="dashboard-card shadow-lg ">
-        <span className="number fs-4 text-secondary">55</span>
-        <span className="title fs-3">gallery</span>
+        <span className="number fs-4 text-secondary">{data.length}</span>
+        <span className="title fs-3">{text}</span>
       </div>
+    </Link>
     </>
   )
 }
