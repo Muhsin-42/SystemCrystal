@@ -84,7 +84,7 @@ const Updates = () => {
         </tr>
       </thead>
       <tbody>
-        {updates.map((update, index) => (
+        {updates?.map((update, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
             <td><img src={update.image} height={50} width={50} alt="post" /></td>

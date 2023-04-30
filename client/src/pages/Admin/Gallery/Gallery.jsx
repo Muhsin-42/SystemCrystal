@@ -90,7 +90,7 @@ const Gallery = () => {
         </tr>
       </thead>
       <tbody>
-        {gallery.map((image, index) => (
+        {gallery?.map((image, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
             <td><img src={image.url} height={50} width={50} alt="post" /></td>

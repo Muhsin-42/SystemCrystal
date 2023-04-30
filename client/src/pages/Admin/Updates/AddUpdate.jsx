@@ -67,7 +67,7 @@ const AddUpdate = () => {
         multiple: false,
         onDrop: acceptedFiles => {
             setImgae(false)
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
+            setFiles(acceptedFiles?.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })));
         }

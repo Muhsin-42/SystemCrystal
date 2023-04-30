@@ -14,7 +14,7 @@ const TableContent = ({ data, editPost, deletePost }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
             <td><img src={item.image} height={50} width={50} alt="post" /></td>

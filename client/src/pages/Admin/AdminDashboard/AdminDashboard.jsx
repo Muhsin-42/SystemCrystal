@@ -34,7 +34,7 @@ const AdminDashboard = () => {
       
       listAll(galleryRef)
         .then(async (res) => {
-          const itemPromises = res.items.map(async (itemRef) => {
+          const itemPromises = res?.items?.map(async (itemRef) => {
             const url = await getDownloadURL(itemRef);
             const metadata = await getMetadata(itemRef);
             const uploadDate = metadata.customMetadata.uploadDate;

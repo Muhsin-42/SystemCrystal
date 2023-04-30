@@ -18,7 +18,7 @@ const GallerySection = () => {
       
       listAll(galleryRef)
         .then(async (res) => {
-          const itemPromises = res.items.map(async (itemRef) => {
+          const itemPromises = res?.items?.map(async (itemRef) => {
             const url = await getDownloadURL(itemRef);
             const metadata = await getMetadata(itemRef);
             const uploadDate = metadata.customMetadata.uploadDate;
@@ -52,7 +52,7 @@ const GallerySection = () => {
         <h3 className='text-center m-2'>Gallery</h3>
         <div className="images">
           {
-            gallery.map((image,index)=>{
+            gallery?.map((image,index)=>{
               return (
                 <img key={index} src={image.url} alt="" />
               )
