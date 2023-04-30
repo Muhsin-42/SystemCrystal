@@ -23,10 +23,10 @@ const Home = () => {
   return (
     <>
         <Main/>
-        <Updates/>
+        {/* <Updates/>
         <Testimonials  />
         <GallerySection/>  
-        <ContactUs/>
+        <ContactUs/> */}
     </>
   )
 }
