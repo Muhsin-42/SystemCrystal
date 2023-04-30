@@ -12,7 +12,6 @@ const ContactUs = () => {
         try {
             const response = await axios.get('api/admin/basicDetails');
             if(response.status < 310){
-                console.log('resss ',response)
               dispatch(setBasicDetails({basicDetails: response.data}))
             }
         } catch (error) {

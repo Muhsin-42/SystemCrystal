@@ -17,11 +17,9 @@ const AdminTestimonials = () => {
     try {
       const response = await axios.get('api/user/review')
       if(response.status<310){
-        console.log('res ',response.data)
         dispatch(setReviews({reviews:response.data}));
       }
     } catch (error) {
-      
       console.log('er ',error)
     }
   }

@@ -22,11 +22,9 @@ const AdminDashboard = () => {
           'Authorization' : `Bearer ${token}`
         }
       })
-      console.log('se', response.data)
       dispatch(setUpdates({updates:response.data}));
       
     } catch (error) {
-      console.log('eee32', error)
     }
   }
   const getGallery = async ()=>{
@@ -46,7 +44,6 @@ const AdminDashboard = () => {
       
           await Promise.all(itemPromises);
           galleryList.sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate));
-          console.log('galleryList:', galleryList);
           dispatch(setGallery({ gallery: galleryList }));
         })
         .catch((error) => {
@@ -71,7 +68,6 @@ const AdminDashboard = () => {
     try {
         const response = await axios.get('api/admin/basicDetails');
         if(response.status < 310){
-          console.log('res ',response.data)
           dispatch(setBasicDetails({basicDetails: response.data}))
         }
     } catch (error) {
@@ -86,7 +82,6 @@ const AdminDashboard = () => {
     getBasicDetails();
   },[]);
 
-  console.log(basicDetails)
   return (
     <div className=' py-5 admin-dashboard'>
       <div className="my-5 cards">

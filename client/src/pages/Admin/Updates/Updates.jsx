@@ -13,13 +13,7 @@ const Updates = () => {
   const updates = useSelector((state)=>state.updates);
   const currentUser = useSelector((state)=>state.user);
   const token = useSelector((state)=>state.token);
-  const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentUpdates = updates?.slice(indexOfFirstPost, indexOfLastPost);
 
   const getAllUpdates = async ()=>{
     try {
@@ -30,7 +24,6 @@ const Updates = () => {
         }
       })
       dispatch(setUpdates({updates:response.data}));
-      setTotalPages(Math.ceil(updates.length / 10)); 
 
     } catch (error) {
       
@@ -76,14 +69,11 @@ const Updates = () => {
       
     }
   }
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
 
     <div className='mt-5 pt-5 px-2'  style={{ overflowX: 'auto' }}> 
-          <table className='table table-striped' style={{
-            // overflowX: 'scroll'
-          }}>
+          <table className='table table-striped'>
       <thead className='thead-dark'>
         <tr>
           <th>No.</th>
@@ -98,7 +88,7 @@ const Updates = () => {
           <tr key={index}>
             <td>{index + 1}</td>
             <td><img src={update.image} height={50} width={50} alt="post" /></td>
-            <td style={{ minWidth : '200px'}}>{update.content.slice(0,50)}...</td>
+            <td style={{ minWidth : '200px'}}>{update?.content?.slice(0,50)}...</td>
             <td>{ moment(update?.createdAt).format('MMMM DD, YYYY')}</td>
             <td>
               <button className='btn btn-outline-danger' onClick={() => deleteUpdate(update?._id,update?.image)}>Delete</button>

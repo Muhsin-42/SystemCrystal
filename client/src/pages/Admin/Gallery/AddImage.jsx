@@ -109,7 +109,6 @@ const AddImage = () => {
                 getDownloadURL(imageRef).then((url) => {
                     getMetadata(imageRef).then((metadata) => {
                         const uploadDate = metadata.customMetadata.uploadDate; // Extract the upload date from the metadata
-                        console.log(url, uploadDate);
                         dispatch(setGallery({gallery : [{url,uploadDate},...gallery]}));
                       }).catch((error) => {
                         console.error('Error getting metadata:', error);
@@ -125,35 +124,6 @@ const AddImage = () => {
 
         }
     }, [imageUpload]);
-
-
-
-
-    // const uploadImage = async (uploadImageName) => {
-    //     console.log('url => ',uploadImageName)
-    //     try {
-    //         const result = await axios.post(`api/admin/gallery/${currentUser._id}`, { data: uploadImageName }, {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 'Authorization': `Bearer ${token}`,
-    //             },
-    //         });
-    //         console.log(' ss post ',result.status)
-    //         if(result.status > 400){
-    //             notifyFailure();
-    //         }else{
-    //             notifySuccess();
-    //             dispatch(setUpdates({ updates: [result.data, ...updates] }));
-    //         }
-            
-    //     } catch (error) {
-    //     }
-    //     setLoading(false);
-    //     setOpen(false);
-    //     setFiles([]);
-    //     setPostContent("");
-    // }
-    // // ********************
 
 
     return (

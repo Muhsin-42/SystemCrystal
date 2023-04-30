@@ -29,7 +29,6 @@ const GallerySection = () => {
           await Promise.all(itemPromises);
           galleryList.sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate));
           dispatch(setGallery({ gallery: galleryList }));
-          console.log('gal ',galleryList)
         })
         .catch((error) => {
           console.error('Error listing images in gallery:', error);

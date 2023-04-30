@@ -31,14 +31,12 @@ const Testimonials = () => {
         <h3 className='text-center m-2'>Testimonials</h3>
         <div className="testimonies">
             {
-                reviews?.slice(0, 3).map((review,index)=>{
+                reviews?.map((review,index)=>{
                     return (
                         <TestimonialCard key={index} review={review}/>
                     )
                 })
             }
-            {/* <TestimonialCard/>
-            <TestimonialCard/> */}
         </div>
 
         <div className="last-line m-3">

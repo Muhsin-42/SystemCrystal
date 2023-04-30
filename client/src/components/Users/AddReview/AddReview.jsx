@@ -59,7 +59,6 @@ function AddReview({ movieDetails }) {
             }            
         } catch (error) {
             notifyReviewExists(error.response.data.msg);
-            console.log('eeeee ',error.response.data)
         }
 
         handleClose();

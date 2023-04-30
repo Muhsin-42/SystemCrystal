@@ -116,7 +116,6 @@ const AddUpdate = () => {
 
 
     const uploadPost = async (uploadImageName) => {
-        console.log('url => ',uploadImageName)
         try {
             const result = await axios.post(`api/admin/update/${currentUser._id}`, { data: uploadImageName, content: postContent }, {
                 headers: {
@@ -124,7 +123,6 @@ const AddUpdate = () => {
                     'Authorization': `Bearer ${token}`,
                 },
             });
-            console.log(' ss post ',result.status)
             if(result.status > 400){
                 notifyFailure();
             }else{

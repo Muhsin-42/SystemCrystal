@@ -15,11 +15,8 @@ const Updates = () => {
   const getAllUpdates = async ()=>{
     try {
       const response = await axios.get('api/admin/update')
-      console.log(response.data)
       dispatch(setUpdates({updates:response.data}));
-  
     } catch (error) {
-      console.log(error)
     }
   }
   
@@ -27,7 +24,6 @@ const Updates = () => {
     getAllUpdates();
   },[]);
   
-  console.log('first ',updates)
   return (
     <>
     <section id="updates" className="updates-main bg-white m-0">

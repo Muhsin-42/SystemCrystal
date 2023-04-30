@@ -20,11 +20,6 @@ const Login = ()=> {
     const notifyLoginError = (error) => toast.error(error, {
         position: toast.POSITION.TOP_RIGHT
       });
-    // const notifyLoginError = (errorMessage) => toast.error(errorMessage, {
-    //     position: toast.POSITION.TOP_RIGHT
-    //   });
-
-
 
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -36,14 +31,9 @@ const Login = ()=> {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post('/api/admin/login', datas);
-            console.log('first token=> ',data.token)
 
 			dispatch(setUser({user: data.user }))
 			dispatch(setToken({token: data.token }))
-
-			// localStorage.setItem("token", data.token);
-            // navigation('/');
-                // window.location = "/";
 		} catch (error) {
 			if (
 				error.response &&
