@@ -24,7 +24,7 @@ const ContactUs = () => {
     },[]);
 
     function handleCallClick() {
-        window.open(`tel:${basicDetails?.phone}`,'_blank');
+        window.open(`tel:${basicDetails?.phone1}`,'_blank');
       }
       function handleDirectionClick() {
         window.open('https://goo.gl/maps/B7qNTox1sQFSg2j7A','_blank');

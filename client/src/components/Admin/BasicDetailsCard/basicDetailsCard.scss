@@ -1,14 +1,13 @@
+
+
 .basic-det-card{
     width: max-content;
     // background-color: red;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
     margin: 20px;
     cursor: pointer;
-    
     padding: 0 50px;
 
     span{
@@ -21,8 +20,11 @@
 }
 
 @media (max-width: 500px) {
-    .dashboard-card{
+    .basic-det-card{
         width: 100%;
+        padding: 0 10px;
+        span{
+            font-size: 18px !important;
+        }
     }
 }
-  

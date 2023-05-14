@@ -14,7 +14,6 @@ const usersController = {
                 fullname, email,rating, reviewMessage
             }).save();
 
-            console.log(newReview);
             res.status(201).json(newReview);
         } catch (error) {
             res.status(500).json({msg: "something went wrong"});
@@ -22,7 +21,6 @@ const usersController = {
     },
     getReviews : async (req,res)=>{
         try {
-            console.log('ejeje')
             const reviews = await ReviewModel.find({}).sort({createdAt:-1});
             res.status(200).json(reviews);
         } catch (error) {

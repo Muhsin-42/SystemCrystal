@@ -21,7 +21,10 @@ app.use(cors())
 app.use(helmet())
 app.use(morgan('common'))
 
-
+app.use(cors({
+    origin: 'https://smart-crystal-facility-management-india.com'
+  }));
+  
 
 // routes
 app.use('/api/user',userRoute);

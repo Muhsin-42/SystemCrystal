@@ -15,8 +15,6 @@ const Updates = () => {
   const getAllUpdates = async ()=>{
     try {
       const response = await axios.get('api/admin/update');
-      console.log('res ',response.data)
-      console.log('res ',response.status)
       if(response.status <210){
         dispatch(setUpdates({updates:response.data}));
       }
@@ -26,8 +24,7 @@ const Updates = () => {
   
   useEffect(()=>{
     getAllUpdates();
-  },[]);
-  console.log('ddd ',updates)  
+  },[]); 
   return (
     <>
     <section id="updates" className="updates-main bg-white m-0">

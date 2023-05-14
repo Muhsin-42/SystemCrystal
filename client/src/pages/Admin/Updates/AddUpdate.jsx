@@ -182,7 +182,7 @@ const AddUpdate = () => {
                     {
                         files[0] &&
                         <Box>
-                            <img src={files[0]?.preview} alt='' style={{  width: "10rem",  height: "10rem",  objectFit: "cover" }}
+                            <img src={files[0]?.preview} alt='loading image' style={{  width: "10rem",  height: "10rem",  objectFit: "cover" }}
                                 onLoad={() => { URL.revokeObjectURL(files[0]?.preview) }} />
                         </Box>
                     }

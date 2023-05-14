@@ -43,7 +43,6 @@ const adminController = {
         }
     },
     postUpdate : async(req,res) =>{
-        console.log('heheheh')
         try {
             const content  = req.body.content;
             const imageName  = req.body.data;
@@ -85,7 +84,6 @@ const adminController = {
     deleteReview: async (req, res) => {
         try {
           const reviewId = req.params.reviewId;
-            console.log(reviewId)
 
             const deletedReview = await ReviewModel.findByIdAndDelete(reviewId);
 
@@ -114,7 +112,6 @@ const adminController = {
     getBasicDetails : async(req,res)=>{
         try {
             const basicDetails = await Admin.findOne({document:'basicdetails'});
-            console.log(basicDetails)
             if(!basicDetails) return res.status(400)
             res.status(200).json(basicDetails)
           } catch (error) {

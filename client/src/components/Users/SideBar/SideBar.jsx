@@ -6,7 +6,7 @@ function SideBar() {
     <>
     <aside className="sidebar">
       <header>
-        <img src="logo.svg" />
+        <img src="logo.svg" alt='logo' />
         <span> DataHub </span>
       </header>
       <button>

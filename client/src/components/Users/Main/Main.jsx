@@ -8,7 +8,7 @@ const Main = () => {
     <section >
     <div className="content-wrapper w-100 text-center ">
       
-        <div className='title-home'> Smart Crystal Facility Management</div>
+        <h1 className='title-home'> Smart Crystal Facility Management</h1>
 
         <span className='d-block'>Cleaners in Kochi</span>
         <span className='d-block'>Open today until 20:00</span>

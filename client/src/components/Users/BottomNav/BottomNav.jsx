@@ -9,10 +9,10 @@ const BottomNav = () => {
 
 
   function handleCallClick() {
-    window.open(`tel:${basicDetails?.phone1}`,'_blank');
+    window.open(`tel:9744700014`);
   }
   function handleDirectionClick() {
-    window.open(`${basicDetails?.addressurl}`,'_blank');
+    window.open(`https://goo.gl/maps/B7qNTox1sQFSg2j7A`);
   }
   return (
     <div className="bottom-navigation">

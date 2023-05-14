@@ -1,6 +1,5 @@
 .dashboard-card{
     width: max-content;
-    // background-color: red;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -11,20 +10,18 @@
     
     padding: 0 50px;
     .number{
-        // background-color: rebeccapurple;
         padding: 30px 0 20px 0;
         font-weight: bold;
     }
     .title{
         padding: 0 0 20px 0;
         font-weight: bold;
-        
     }
 }
 
 @media (max-width: 500px) {
     .dashboard-card{
-        width: 100%;
+        width: 300px !important;
     }
 }
   

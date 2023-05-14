@@ -54,7 +54,7 @@ const GallerySection = () => {
           {
             gallery?.map((image,index)=>{
               return (
-                <img key={index} src={image.url} alt="" />
+                <img key={index} src={image.url} alt="loading image" />
               )
             })
           }
