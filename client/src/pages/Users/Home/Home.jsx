@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
-import Updates from '../../../components/Users/Updates/Updates'
-import Testimonials from '../../../components/Users/Testimonials/Testimonials'
-import GallerySection from '../../../components/Users/Gallery/GallerySection'
-import ContactUs from '../../../components/Users/ContactUs/ContactUs'
-import { Link } from 'react-router-dom';
+import React, { useEffect, lazy, Suspense } from 'react'
 import { useLocation } from 'react-router-dom';
 import Main from '../../../components/Users/Main/Main'
+
+// Lazy load the components
+const Updates = lazy(() => import('../../../components/Users/Updates/Updates'));
+const Testimonials = lazy(() => import('../../../components/Users/Testimonials/Testimonials'));
+const GallerySection = lazy(() => import('../../../components/Users/Gallery/GallerySection'));
+const ContactUs = lazy(() => import('../../../components/Users/ContactUs/ContactUs'));
+
 const Home = () => {
   const location = useLocation();
   useEffect(() => {
@@ -22,11 +24,15 @@ const Home = () => {
   }, [location.hash]);
   return (
     <>
-        <Main/>
-        <Updates/>
-        <Testimonials  />
-        <GallerySection/>  
-        <ContactUs/>
+      <>
+      <Main />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Updates />
+          <Testimonials />
+          <GallerySection />
+          <ContactUs />
+        </Suspense>
+      </>
     </>
   )
 }

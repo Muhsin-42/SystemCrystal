@@ -31,11 +31,12 @@ const Testimonials = () => {
         <h3 className='text-center m-2'>Testimonials</h3>
         <div className="testimonies">
             {
-                reviews?.map((review,index)=>{
-                    return (
-                        <TestimonialCard key={index} review={review}/>
-                    )
-                })
+                 reviews?.map((review, index) => {
+                    if (index < 6) {
+                      return <TestimonialCard key={index} review={review} />;
+                    }
+                    return null;
+                  })
             }
         </div>
 

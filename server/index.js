@@ -22,8 +22,9 @@ app.use(helmet())
 app.use(morgan('common'))
 
 app.use(cors({
-    origin: 'https://smart-crystal-facility-management-india.com'
-  }));
+  origin: ['https://smart-crystal-facility-management-india.com', 'http://localhost:5173']
+}));
+
   
 
 // routes

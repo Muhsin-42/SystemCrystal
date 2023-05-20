@@ -4,7 +4,8 @@ import { getStorage, ref, listAll, getDownloadURL, getMetadata } from "firebase/
 import { storage } from '../../../firebase/firebase'
 import { setGallery } from '../../../Redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const GallerySection = () => {
 
@@ -54,7 +55,15 @@ const GallerySection = () => {
           {
             gallery?.map((image,index)=>{
               return (
-                <img key={index} src={image.url} alt="loading image" />
+                <LazyLoadImage
+                  key={image.url}
+                  src={image.url}
+                  alt='loading image'
+                  position="top"
+                  effect="blur"
+                  width={335} // Adjust the width as needed
+                  height={335} // Adjust the height as needed
+                />
               )
             })
           }

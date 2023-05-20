@@ -20,6 +20,7 @@ const usersController = {
         }
     },
     getReviews : async (req,res)=>{
+        console.log('getting reviews')
         try {
             const reviews = await ReviewModel.find({}).sort({createdAt:-1});
             res.status(200).json(reviews);
