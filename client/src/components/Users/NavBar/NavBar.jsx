@@ -3,13 +3,16 @@ import './navBar.scss'
 import './main.js'
 import MenuBar from '../Menu/MenuBar'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function NavBar() {
+  const basicDetails = useSelector(state=>state.basicDetails);
+
   function handleCallClick() {
-    window.open('tel:9744700014','_blank');
+    window.open(`tel:${basicDetails?.phone1}`,'_blank');
   }
   function handleDirectionClick() {
-    window.open('https://goo.gl/maps/B7qNTox1sQFSg2j7A','_blank');
+    window.open(`${basicDetails.addressurl}`,'_blank');
   }
   return (
     <>

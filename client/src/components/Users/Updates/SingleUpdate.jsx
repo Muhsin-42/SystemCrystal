@@ -3,10 +3,13 @@ import './singleUpdate.scss'
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useSelector } from 'react-redux';
 
 const SingleUpdate = ({update}) => {
+  const basicDetails = useSelector(state=>state.basicDetails);
+
   function handleClick() {
-    window.location.href = 'tel:9744700014';
+    window.open(`tel:${basicDetails?.phone1}`,'_blank');
   } 
   return (
     <>

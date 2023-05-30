@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 const UnProtectedLayout = ({ children}) => {
   const  user =  useSelector(state => state.user);
-    console.log(user)
   if(user) return <Navigate to='/admin'/>
   return children;
 };

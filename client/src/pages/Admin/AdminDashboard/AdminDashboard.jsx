@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import DashboardCard from '../../../components/Admin/Card/DashboardCard'
 import './adminDashboard.scss'
-import AddUpdate from '../Updates/AddUpdate'
 import { useDispatch, useSelector } from 'react-redux'
 import { setGallery, setUpdates, setReviews, setBasicDetails } from '../../../Redux/store'
 import axios from '../../../utils/axios'

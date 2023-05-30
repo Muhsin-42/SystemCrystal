@@ -9,6 +9,7 @@ router.post('/update/:userId',adminController.verifyToken, adminController.postU
 router.delete('/update/:updateId',adminController.verifyToken, adminController.deleteUpdate);
 router.get('/update', adminController.getUpdates);
 router.get('/basicDetails', adminController.getBasicDetails);
+router.put('/basicDetails', adminController.editBasicDetails);
 router.delete('/review/:reviewId',adminController.verifyToken, adminController.deleteReview);
 
 module.exports = router;

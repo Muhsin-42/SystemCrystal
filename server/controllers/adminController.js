@@ -2,6 +2,7 @@ const { LoginValidate } = require('../utils/LoginValidate');
 const { Admin, validate } = require('../models/AdminModel');
 const ReviewModel = require('../models/ReviewModel')
 const UpdatesModel = require('../models/UpdatesModel')
+const BasicDetailsModel = require('../models/BasicDetailsModel')
 const TokenModel = require('../models/TokenModel');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
@@ -19,7 +20,6 @@ const adminController = {
           const user = await Admin.findOne({ email: email });
           next();
         } catch (error) {
-          console.log('err ',error)
           res.status(400).json({ status: "error", error: "invalid token" });
         }
     },
@@ -38,7 +38,6 @@ const adminController = {
             let token = admin.generateAuthToken();
             res.status(200).json({token,user: admin});
         }catch(error){
-            console.log('admin login error ',error);
             res.status(500);
         }
     },
@@ -60,7 +59,6 @@ const adminController = {
             
             res.status(201).json(populatedPost);
         } catch (error) {
-            console.log(error)
             res.status(500).json({ message: error.message });
         }
     },
@@ -77,7 +75,6 @@ const adminController = {
       
           res.status(200).json({ message: 'Post deleted successfully' });
         } catch (error) {
-          console.log(error);
           res.status(500).json({ message: error.message });
         }
     },
@@ -93,7 +90,6 @@ const adminController = {
       
           res.status(200).json({ message: 'Review deleted successfully' });
         } catch (error) {
-          console.log(error);
           res.status(500).json({ message: "something went wrong" });
         }
     },
@@ -111,14 +107,26 @@ const adminController = {
     },
     getBasicDetails : async(req,res)=>{
         try {
-            const basicDetails = await Admin.findOne({document:'basicdetails'});
+            const basicDetails = await BasicDetailsModel.findOne({_id: Object('644e30c88329e8543986e7d4')});
             if(!basicDetails) return res.status(400)
             res.status(200).json(basicDetails)
           } catch (error) {
-          console.log(error)
             res.status(500);
         }
     },
+    editBasicDetails : async (req,res) =>{
+      try{
+
+        const result = await BasicDetailsModel.findByIdAndUpdate(
+          '644e30c88329e8543986e7d4',
+          { ...req.body },
+          { new: true }
+        );
+
+        res.status(200).json(result);
+      }catch(error){
+      }
+    }
 }
 
 module.exports = adminController;

@@ -20,13 +20,11 @@ button {
     place-items: center;
     width: 60px;
     height: 73px;
-    // background-image: url("menu.svg");
     background-repeat: no-repeat;
     background-position: center;
   }
   
   body.open .burger {
-    // background-image: url("close.svg");
     color: white;
   }
   

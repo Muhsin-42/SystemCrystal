@@ -8,7 +8,7 @@ import { setPostedReview, setReviews } from '../../../Redux/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function AddReview({ movieDetails }) {
+function AddReview() {
 
     const reviews = useSelector(state => state.reviews);
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function AddReview({ movieDetails }) {
     const notifyMinimun = () => toast.warn("Review should be at least 5 character.", {
         position: toast.POSITION.TOP_RIGHT
       });
-    const notifyEmptyRating = () => toast.error("Please rate the movie", {
+    const notifyEmptyRating = () => toast.error("Email can't be empty", {
         position: toast.POSITION.TOP_RIGHT
       });
     const notifyReviewExists = (msg) => toast.error(msg, {
@@ -87,7 +87,6 @@ function AddReview({ movieDetails }) {
                 <div className="modal-dialog ">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-1 m-0 p-0" id="exampleModalLabel">{movieDetails?.title}</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body" >

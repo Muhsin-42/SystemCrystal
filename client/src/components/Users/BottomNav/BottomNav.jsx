@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import './bottomNav.scss';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 const BottomNav = () => {
 
-  const dispatch = useDispatch();
   const basicDetails = useSelector(state=>state.basicDetails);
 
 
   function handleCallClick() {
-    window.open(`tel:9744700014`);
+    window.open(`tel:${basicDetails?.phone1}`);
   }
   function handleDirectionClick() {
-    window.open(`https://goo.gl/maps/B7qNTox1sQFSg2j7A`);
+    window.open(`${basicDetails.addressurl}`,'_blank');
   }
   return (
     <div className="bottom-navigation">

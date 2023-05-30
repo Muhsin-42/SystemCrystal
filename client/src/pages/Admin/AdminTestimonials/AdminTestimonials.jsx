@@ -20,7 +20,6 @@ const AdminTestimonials = () => {
         dispatch(setReviews({reviews:response.data}));
       }
     } catch (error) {
-      console.log('er ',error)
     }
   }
 
@@ -65,9 +64,7 @@ const AdminTestimonials = () => {
     <>
 
     <div className='mt-5 pt-5 px-2'  style={{ overflowX: 'auto' }}> 
-          <table className='table table-striped' style={{
-            // overflowX: 'scroll'
-          }}>
+          <table className='table table-striped' >
       <thead className='thead-dark'>
         <tr>
           <th>No.</th>
